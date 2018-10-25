@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>奶粉</title>
+    <!-- 引入 echarts.js -->
+    <!-- 这里是加载刚下好的echarts.min.js，注意路径 -->
+    <script src="echarts.min.js"></script>
+</head>
+
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 1000px;height:600px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        var option = {
+            dataZoom: [{
+                show: true,
+                yAxisIndex: 0,
+                filterMode: 'empty',
+                width: 20,
+                height: '83%',
+                showDataShadow: false,
+                left: '95%',
+                start: '60'
+            }],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            legend: {
+                data: ['0-6个月阶段', '6-12个月阶段', '1-3周岁阶段'],
+                textStyle: {
+                    color: "white",
+                    fontSize: 24
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                axisLabel: {
+                    fontSize: 24,
+                    color: 'white' //坐标轴线颜色
+                },
+                type: 'value',
+                boundaryGap: [0, 0.01]
+            },
+            yAxis: {
+                axisLabel: {
+                    fontSize: 24,
+                    color: 'white' //坐标轴线颜色
+                },
+                type: 'category',
+                data: ['贝因美', '圣元优博', '惠氏', '多美滋', '美赞臣', '美素佳儿', '诗幼乐', '爱他美', '可瑞康', '爱伊勒', '特福芬']
+            },
+            series: [{
+                name: '0-6个月阶段',
+                type: 'bar',
+                data: [328, 198, 258, 398, 265, 160, 268, 298, 365, 278, 368, 268]
+            }, {
+                name: '6-12个月阶段',
+                type: 'bar',
+                data: [328, 188, 228, 398, 231, 158, 268, 298, 355, 249, 368, 268]
+            }, {
+                name: '1-3周岁阶段',
+                type: 'bar',
+                data: [238, 154, 208, 398, 209, 414, 456, 298, 345, 249, 368, 268]
+            }]
+        };
+
+
+
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>

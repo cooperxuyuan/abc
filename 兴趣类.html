@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>兴趣爱好</title>
+    <!-- 引入 echarts.js -->
+    <!-- 这里是加载刚下好的echarts.min.js，注意路径 -->
+    <script src="echarts.min.js"></script>
+</head>
+
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 1000px;height:600px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        var data = [{
+            name: '美学类',
+            itemStyle: {
+                color: '#0C4842'
+            },
+            children: [{
+                name: '钢琴',
+                itemStyle: {
+                    color: '#376B6D'
+                },
+                children: [{
+                    name: '高档',
+                    value: 30000,
+                    itemStyle: {
+                        color: '#376B6D'
+                    }
+                }, {
+                    name: '普通档',
+                    value: 17000,
+                    itemStyle: {
+                        color: '#376B6D'
+                    }
+                }, ]
+            }, {
+                name: '围棋',
+                itemStyle: {
+                    color: '#376B6D'
+                },
+                children: [{
+                    name: '高档',
+                    value: 6000,
+                    itemStyle: {
+                        color: '#376B6D'
+                    }
+                }, {
+                    name: '普通档',
+                    value: 3800,
+                    itemStyle: {
+                        color: '#376B6D'
+                    }
+                }]
+            }, {
+                name: '书法',
+                itemStyle: {
+                    color: '#376B6D'
+                },
+                children: [{
+                    name: '高档',
+                    value: 7200,
+                    itemStyle: {
+                        color: '#376B6D'
+                    }
+                }, {
+                    name: '普通档',
+                    value: 3500,
+                    itemStyle: {
+                        color: '#376B6D'
+                    }
+                }]
+            }, {
+                name: '素描',
+                itemStyle: {
+                    color: '#376B6D'
+                },
+                children: [{
+                    name: '高档',
+                    value: 4700,
+                    itemStyle: {
+                        color: '#376B6D'
+                    }
+                }, {
+                    name: '普通档',
+                    value: 2550,
+                    itemStyle: {
+                        color: '#376B6D'
+                    }
+                }]
+            }]
+        }, {
+            name: '智力类',
+            itemStyle: {
+                color: '#0089A7'
+            },
+            children: [{
+                name: '奥数等',
+                itemStyle: {
+                    color: '#33A6B8'
+                },
+                children: [{
+                    name: '高档',
+                    value: 8000,
+                    itemStyle: {
+                        color: '#33A6B8'
+                    }
+                }, {
+                    name: '普通档',
+                    value: 3000,
+                    itemStyle: {
+                        color: '#33A6B8'
+                    }
+                }]
+            }]
+        }, {
+            name: '运动类',
+            itemStyle: {
+                color: '#C73E3A'
+            },
+            children: [{
+                name: '球类',
+                itemStyle: {
+                    color: '#d45a59'
+                },
+                children: [{
+                    name: '普通档',
+                    value: 2800,
+                    itemStyle: {
+                        color: '#ae341f'
+                    },
+
+                }, {
+                    name: '高档',
+                    value: 6000,
+                    itemStyle: {
+                        color: '#da5c1f'
+                    }
+                }]
+            }, {
+                name: '马术',
+                itemStyle: {
+                    color: '#d45a59'
+                },
+                children: [{
+                    name: '普通档',
+                    value: 13500,
+                    itemStyle: {
+                        color: '#ae341f'
+                    }
+                }, {
+                    name: '高档',
+                    value: 27000,
+                    itemStyle: {
+                        color: '#da5c1f'
+                    }
+                }]
+            }, {
+                name: '卡丁车',
+                itemStyle: {
+                    color: '#d45a59'
+                },
+                children: [{
+                    name: '普通档',
+                    value: 12000,
+                    itemStyle: {
+                        color: '#ae341f'
+                    }
+                }, {
+                    name: '高档',
+                    value: 22500,
+                    itemStyle: {
+                        color: '#da5c1f'
+                    }
+                }],
+            }]
+        }];
+
+        option = {
+            tooltip: {
+                trigger: 'item',
+                formatter: "兴趣爱好 <br/>{b}: {c}元/年"
+            },
+            series: {
+                type: 'sunburst',
+                highlightPolicy: 'ancestor',
+                data: data,
+                radius: [0, '95%'],
+                sort: null,
+                levels: [{}, {
+                    r0: '15%',
+                    r: '35%',
+                    itemStyle: {
+                        borderWidth: 2
+                    },
+                    label: {
+                        fontSize: 24,
+                        rotate: 'tangential'
+                    }
+                }, {
+                    r0: '35%',
+                    r: '70%',
+                    label: {
+                        fontSize: 24,
+                        align: 'center'
+                    }
+                }, {
+                    r0: '70%',
+                    r: '72%',
+                    label: {
+                        fontSize: 24,
+                        position: 'outside',
+                        padding: 3,
+                        silent: false
+                    },
+                    itemStyle: {
+                        borderWidth: 3
+                    }
+                }]
+            }
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>

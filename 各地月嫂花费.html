@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>各地月嫂花费</title>
+    <!-- 引入 echarts.js -->
+    <!-- 这里是加载刚下好的echarts.min.js，注意路径 -->
+    <script src="echarts.min.js"></script>
+</head>
+
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 1000px;height:600px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        var option = {
+            angleAxis: {
+                axisLabel: {
+                    fontSize: 24
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: 'white' //坐标轴线颜色
+                    },
+                }
+            },
+            radiusAxis: {
+                axisLabel: {
+                    fontSize: 23
+                },
+                type: 'category',
+                data: ['深圳', '广州', '上海', '北京', ],
+                z: 10,
+                axisLine: {
+                    lineStyle: {
+                        color: 'white' //坐标轴线颜色
+                    },
+                }
+            },
+            polar: {},
+            tooltip: {
+                trigger: 'item',
+                formatter: "费用 <br/>{b}: {c}元"
+            },
+            series: [{
+                type: 'bar',
+                data: [14600, 13900, 13000, 14400],
+                coordinateSystem: 'polar',
+                name: '公立幼儿园学费',
+                stack: 'a'
+            }],
+
+        }
+
+
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>

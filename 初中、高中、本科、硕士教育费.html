@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>初中、高中、本科、硕士教育费</title>
+    <!-- 引入 echarts.js -->
+    <!-- 这里是加载刚下好的echarts.min.js，注意路径 -->
+    <script src="echarts.min.js"></script>
+</head>
+
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 1000px;height:600px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        var data = [
+            [160000, 700000, 430000],
+            [26500, 141500, 84000],
+            [19500, 49500, 34500],
+            [160000, 700000, 430000],
+            [15500, 67500, 41500],
+            [94000, 290000, 192000],
+            [28000, 56000, 42000],
+            [8200, 15200, 11700],
+            [28000, 76000, 37000],
+            [8200, 11200, 9200]
+        ];
+        var cities = ['海外硕士', '国内专业硕士', '国内学术硕士', '海外本科', '国内本科', '私立高中(国际部)', '私立高中(普通)', '公立高中', '私立初中', '公立初中'];
+        var barHeight = 100;
+
+        option = {
+            grid: {             
+                top: '25%', //距上边距
+
+                               left: '25%', //距离左边距
+
+                            right: '25%', //距离右边距
+
+                            bottom: '25%', //距离下边距
+
+                           
+            },
+            legend: {
+                show: true,
+                data: ['价格范围', '均值'],
+                textStyle: {
+                    color: "white",
+                    fontSize: 24
+                }
+            },
+            dataZoom: [{
+                type: 'inside',
+                start: 0,
+                end: 100
+            }],
+            grid: {
+                top: 100
+            },
+            angleAxis: {
+                axisLabel: {
+                    fontSize: 24
+                },
+                type: 'category',
+                data: cities,
+                axisLine: {
+                    lineStyle: {
+                        color: 'white' //坐标轴线颜色
+                    },
+                }
+            },
+            tooltip: {
+                show: true,
+                formatter: function(params) {
+                    var id = params.dataIndex;
+                    return cities[id] + '<br>最低：' + data[id][0] + '<br>最高：' + data[id][1] + '<br>平均：' + data[id][2];
+                }
+            },
+            radiusAxis: {
+                axisLabel: {
+                    fontSize: 17
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: 'white' //坐标轴线颜色
+                    },
+                }
+            },
+            polar: {},
+            series: [{
+                type: 'bar',
+                itemStyle: {
+                    normal: {
+                        color: 'transparent'
+                    }
+                },
+                data: data.map(function(d) {
+                    return d[0];
+                }),
+                coordinateSystem: 'polar',
+                stack: '最大最小值',
+                silent: true
+            }, {
+                type: 'bar',
+                data: data.map(function(d) {
+                    return d[1] - d[0];
+                }),
+                coordinateSystem: 'polar',
+                name: '价格范围',
+                stack: '最大最小值'
+            }, {
+                type: 'bar',
+                itemStyle: {
+                    normal: {
+                        color: 'transparent'
+                    }
+                },
+                data: data.map(function(d) {
+                    return d[2] - barHeight;
+                }),
+                coordinateSystem: 'polar',
+                stack: '均值',
+                silent: true,
+                z: 10
+            }, {
+                type: 'bar',
+                data: data.map(function(d) {
+                    return barHeight * 2
+                }),
+                coordinateSystem: 'polar',
+                name: '均值',
+                stack: '均值',
+                barGap: '-100%',
+                z: 10
+            }],
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>

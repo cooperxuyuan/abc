@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>产期护理费用</title>
+    <!-- 引入 echarts.js -->
+    <!-- 这里是加载刚下好的echarts.min.js，注意路径 -->
+    <script src="echarts.min.js"></script>
+</head>
+
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 1000px;height:600px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        var data = [
+            [7000, 18000, 12500],
+            [5000, 10000, 7500],
+            [2000, 5000, 3500],
+            [3000, 4000, 3500],
+            [2000, 4000, 3000],
+            [2000, 4000, 3000],
+            [1000, 2000, 1500],
+        ];
+        var cities = ['月嫂费用', '月子餐', '产后康复训练课程', '钟点工', '催乳费', '杂费', '婴儿游泳费', ];
+        var barHeight = 50;
+
+        option = {
+            legend: {
+                textStyle: {
+                    color: "white",
+                    fontSize: 24
+                },
+                show: true,
+                data: ['价格范围', '均值']
+            },
+            dataZoom: [{
+                type: 'inside',
+                start: 0,
+                end: 100
+            }],
+            grid: {
+                top: 100
+            },
+            angleAxis: {
+                axisLabel: {
+                    fontSize: 24
+                },
+                type: 'category',
+                data: cities,
+                axisLine: {
+                    lineStyle: {
+                        color: 'white' //坐标轴线颜色
+                    },
+                }
+            },
+            tooltip: {
+                show: true,
+                formatter: function(params) {
+                    var id = params.dataIndex;
+                    return cities[id] + '<br>最低：' + data[id][0] + '<br>最高：' + data[id][1] + '<br>平均：' + data[id][2];
+                }
+            },
+            radiusAxis: {
+                axisLabel: {
+                    fontSize: 24
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: 'white' //坐标轴线颜色
+                    },
+                }
+            },
+            polar: {},
+            series: [{
+                type: 'bar',
+                itemStyle: {
+                    normal: {
+                        color: 'transparent'
+                    }
+                },
+                data: data.map(function(d) {
+                    return d[0];
+                }),
+                coordinateSystem: 'polar',
+                stack: '最大最小值',
+                silent: true
+            }, {
+                type: 'bar',
+                data: data.map(function(d) {
+                    return d[1] - d[0];
+                }),
+                coordinateSystem: 'polar',
+                name: '价格范围',
+                stack: '最大最小值'
+            }, {
+                type: 'bar',
+                itemStyle: {
+                    normal: {
+                        color: 'transparent'
+                    }
+                },
+                data: data.map(function(d) {
+                    return d[2] - barHeight;
+                }),
+                coordinateSystem: 'polar',
+                stack: '均值',
+                silent: true,
+                z: 10
+            }, {
+                type: 'bar',
+                data: data.map(function(d) {
+                    return barHeight * 2
+                }),
+                coordinateSystem: 'polar',
+                name: '均值',
+                stack: '均值',
+                barGap: '-100%',
+                z: 10
+            }],
+
+        };
+
+
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>
